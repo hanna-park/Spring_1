@@ -1,4 +1,4 @@
-package com.qq.s1.notice;
+package com.qq.notice;
 
 import java.sql.Date;
 

@@ -1,19 +1,31 @@
-package com.qq.s1.notice;
+package com.qq.notice;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
-import com.qq.util.DBConnector;
+import javax.inject.Inject;
+import javax.sql.DataSource;
 
+import org.springframework.stereotype.Repository;
+
+
+
+@Repository
 public class NoticeDAO {
 	
+	@Inject
+	private DataSource datasource;
 	
 	public void update() throws Exception{
 		
-		Connection con = DBConnector.getConnect();
+		Connection con = datasource.getConnection();
 		String sql = "update notice set title=?, contents=? where num=?";
 		
 		
@@ -23,7 +35,7 @@ public class NoticeDAO {
 	public NoticeDTO selectOne(int num) throws Exception{
 		NoticeDTO noticeDTO = null;
 		
-		Connection con = DBConnector.getConnect();
+		Connection con = datasource.getConnection();
 		
 		String sql = "select * from notice where num=?";
 		
@@ -53,7 +65,7 @@ public class NoticeDAO {
 
 	public List<NoticeDTO> noticeList() throws Exception{
 		ArrayList<NoticeDTO> ar = new ArrayList<NoticeDTO>();
-		Connection con = DBConnector.getConnect();
+		Connection con = datasource.getConnection();
 		
 		String sql = "select * from notice order by num desc";
 		PreparedStatement st = con.prepareStatement(sql);
