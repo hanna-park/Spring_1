@@ -2,6 +2,7 @@ package com.qq.s1;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,8 @@ import com.qq.s1.notice.NoticeService;
 @RequestMapping("/notice/**")
 public class NoticeController {
 	
+	@Inject
 	private NoticeService noticeService;
-	
-	public NoticeController() {
-		noticeService = new NoticeService();
-	}
 	
 	
 	//noticeWirte POST
